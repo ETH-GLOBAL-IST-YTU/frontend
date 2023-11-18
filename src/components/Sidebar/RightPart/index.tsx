@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Search from "./Search";
 import { RoomCompType } from "../../../types/room.d";
 import Part from "./Part";
+import { useDispatch } from "react-redux";
+import { setTab } from "../../../redux/tabSlice";
 
 const dummyRooms: RoomCompType[] = [
   {
@@ -63,21 +65,21 @@ const dummyRooms: RoomCompType[] = [
 
 const Index = () => {
   const [searchKey, setSearchKey] = useState<string>("");
-  const [current, setCurrent] = useState<string>(dummyRooms?.[0]?.id);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setTab(dummyRooms?.[0]?.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="w-full flex flex-col pr-7 py-6">
       <h1 className="text-xs font-normal mt-10 mb-5">NFT Odaları</h1>
       <Search value={searchKey} setValue={setSearchKey} />
       <div className="flex flex-col gap-y-4 overflow-auto max-w-[70vh]">
         {dummyRooms?.map((a: RoomCompType) => (
-          <Part
-            key={a?.id}
-            setCurrent={setCurrent}
-            current={current}
-            id={a?.id}
-            avatar={a?.avatar}
-            text={a?.text}
-          />
+          <Part key={a?.id} id={a?.id} avatar={a?.avatar} text={a?.text} />
         ))}
       </div>
     </div>

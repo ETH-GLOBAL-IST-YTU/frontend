@@ -1,17 +1,22 @@
 import { FC } from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { setTab } from "../../../redux/tabSlice";
+import { RootState } from "../../../redux/store";
+
 interface PartProps {
   avatar: string | undefined;
   text: string;
-  current: string;
   id: string;
-  setCurrent: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Part: FC<PartProps> = ({ avatar, text, id, current, setCurrent }) => {
+const Part: FC<PartProps> = ({ avatar, text, id }) => {
+  const dispatch = useDispatch();
+  const current = useSelector((state: RootState) => state.tab.current);
   return (
     <div
-      onClick={() => setCurrent(id)}
+      onClick={() => dispatch(setTab(id))}
       className={`p-2  border-[1px] transition-all border-solid cursor-pointer ${
         current === id
           ? "border-secondary-1 bg-[#3570E0] bg-opacity-20"
