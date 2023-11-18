@@ -1,5 +1,11 @@
+import Sidebar from "./components/Sidebar";
+
 function App() {
-  return <div className="text-xl underline">Hello World</div>;
+  return (
+    <main className="bg-level-2 h-screen w-full text-white py-6 pl-8 pr-10">
+      <Sidebar />
+    </main>
+  );
 }
 
 export default App;
