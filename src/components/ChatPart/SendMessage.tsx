@@ -22,6 +22,7 @@ export const SendMessage = () => {
           }}
         />
         <input
+          autoComplete="off"
           name="message"
           className="w-full bg-[#FFFFFF1F] wrapper-border !border-[1px] py-5 pl-12 overflow-auto pr-20 rounded-2xl outline-none h-20"
           value={message}
